@@ -14,7 +14,30 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+  raise TriangleError, "Sides should be positive" if a <= 0 || b <= 0 || c <= 0
+  raise TriangleError, "2 sides should be more than third side" if (a >= (b + c)) || (b >= (a + c)) || (c >= (a + b))
+
+  sides_equality_count = 0
+
+  if a == b
+  	sides_equality_count += 1
+  end
+
+  if b == c
+  	sides_equality_count += 1
+  end
+
+  if a == c
+  	sides_equality_count += 1
+  end
+
+  if sides_equality_count == 3
+  	:equilateral
+  elsif sides_equality_count == 1
+  	:isosceles
+  else
+  	:scalene
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
