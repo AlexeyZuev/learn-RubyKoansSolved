@@ -30,7 +30,56 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # Your goal is to write the score method.
 
 def score(dice)
-  # You need to write this method
+  diceValues = (1..6).to_a
+
+  occurencies = Hash.new
+  diceValues.each do |item|
+    occurencies[item] = countOccurencies(item, dice)
+  end
+
+  totalScore = 0
+  diceValues.each do |item|
+    totalScore += calcScoreForVal(item, occurencies[item])
+  end
+
+  return totalScore
+end
+
+def countOccurencies(val, dice)
+  result = 0
+  dice.each do |item|
+    if item == val
+      result += 1
+    end
+  end
+
+  return result
+end
+
+def calcScoreForVal(val, occurencies)
+  result = 0
+
+  if (val == 5)
+    result = 
+      if occurencies >= 3
+        500 + (occurencies - 3) * 50
+      else
+         50 * occurencies
+      end
+  elsif (val == 1)
+    result = 
+      if occurencies >= 3
+        1000 + (occurencies - 3) * 100
+      else
+        100 * occurencies
+      end
+  else
+    if occurencies == 3
+      result = val * 100
+    end
+  end
+
+  return result
 end
 
 class AboutScoringProject < Neo::Koan
